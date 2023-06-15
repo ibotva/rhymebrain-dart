@@ -15,7 +15,7 @@ Warning: This package does not have a stable version yet, it may not work as int
 
 ## Getting started
 
-> Note: According to [https://rhymebrain.com/api.html](Rhyme brain docs), you may only make 350 requests per hour.
+> Note: According to (RhymeBrain Docs)[https://rhymebrain.com/api.html], you may only make 350 requests per hour.
 
 Installtion is simple, run `pub get rhymebrain`
 
