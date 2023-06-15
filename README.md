@@ -17,7 +17,7 @@ Warning: This package does not have a stable version yet, it may not work as int
 
 > Note: According to [RhymeBrain Documentation](https://rhymebrain.com/api.html), you may only make 350 requests per hour.
 
-Installtion is simple, run `pub get rhymebrain`
+Installtion is simple, run `dart pub add rhymebrain`
 
 ## Usage
 

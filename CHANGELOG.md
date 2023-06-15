@@ -1,4 +1,4 @@
-## 0.0.10
+## 0.0.10-dev.1
 
 - Initial version. (Tobi writing)
 
@@ -11,3 +11,7 @@
 - There is a parameters object with a toMap method, it is encoded as URL parameters and sent to HTTP request.
 
 - I also found that with RhymeBrain.com API, it is important you list the function name before any other arguments, no idea why that crashes it unfortunately.
+
+## 0.0.11-dev.1
+
+- Accidental, must bump version by one to update readme lol.
