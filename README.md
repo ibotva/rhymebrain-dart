@@ -112,5 +112,5 @@ print(info.confident)
 
 RhymeBrain.com requires you to adknowledge them in your app in some way, shape, or form, in a public manner, when you use their systems as part of your application. Regardless of license, because of these rules, you are required to adknowledge them if you plan on using their service.
 
-Please refer to [RhymeBrain Documentation](https://rhymebrain.com/api.html) for a better understanding of the API.
+Please refer to [RhymeBrain Documentation](https://rhymebrain.com/api.html) for a better understanding of the API, and remember to adknowledge them for usage of their API.
 
