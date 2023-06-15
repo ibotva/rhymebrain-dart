@@ -1,4 +1,4 @@
-# RhymeBrain.com API wrapper
+# RhymeBrain.com API wrapper [![Dart](https://github.com/ibotva/rhymebrain-dart/actions/workflows/dart.yml/badge.svg)](https://github.com/ibotva/rhymebrain-dart/actions/workflows/dart.yml)
 This is a API wrapper for RhymeBrain.com written in the Dart programming language, its intended to be a free and easy way to get rhymes for a word using dart. 
 
 Warning: This package does not have a stable version yet, it may not work as intended, please submit an issue if something is wrong with it, it needs more organized and concise documentation as well.
