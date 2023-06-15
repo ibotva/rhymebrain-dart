@@ -15,7 +15,8 @@ Warning: This package does not have a stable version yet, it may not work as int
 
 ## Getting started
 
-> Note: According to (RhymeBrain Docs)[https://rhymebrain.com/api.html], you may only make 350 requests per hour.
+> Note: According to [RhymeBrain Docs](https://rhymebrain.com/api.html), you may only make 350 requests per hour.
+> Another Note: `getFuzzyRhymes` is not listed in [RhymeBrain Docs](https://rhymebrain.com/api.html). It's use may not be allowed.
 
 Installtion is simple, run `pub get rhymebrain`
 
