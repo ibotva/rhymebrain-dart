@@ -15,3 +15,7 @@
 ## 0.0.11-dev.1
 
 - Accidental, must bump version by one to update readme lol.
+
+## 0.0.11-dev.2
+
+- Status badge and Github actions added
