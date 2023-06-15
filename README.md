@@ -15,7 +15,7 @@ Warning: This package does not have a stable version yet, it may not work as int
 
 ## Getting started
 
-> Note: According to (https://rhymebrain.com/api.html)[Rhyme brain docs], you may only make 350 requests per hour.
+> Note: According to [RhymeBrain Documentation](https://rhymebrain.com/api.html), you may only make 350 requests per hour.
 
 Installtion is simple, run `pub get rhymebrain`
 
@@ -31,7 +31,7 @@ RhymeBrain rbclient = RhymeBrain();
 
 /// takes optional maxResults integer argument.
 /// takes optional lang String, ISO639-1 format.
-List<Rhyme> rhymes = await rbclient.getRhymes(word: "test");
+final List<Rhyme> rhymes = await rbclient.getRhymes(word: "test");
 
 for (var rhyme in rhymes) {
     /// The rhyming word
@@ -111,4 +111,6 @@ print(info.confident)
 ## Additional information
 
 RhymeBrain.com requires you to adknowledge them in your app in some way, shape, or form, in a public manner, when you use their systems as part of your application. Regardless of license, because of these rules, you are required to adknowledge them if you plan on using their service.
+
+Please refer to [RhymeBrain Documentation](https://rhymebrain.com/api.html) for a better understanding of the API.
 
