@@ -19,6 +19,8 @@ Warning: This package does not have a stable version yet, it may not work as int
 
 Installtion is simple, run `dart pub add rhymebrain`
 
+[Pub.dev RhymeBrain Library](https://pub.dev/packages/rhymebrain)
+
 ## Usage
 
 For any response that has `.offensive`, `.confident`, or `.common`, these are derived from `flags` (which are represented as a string containing the letters `a`, `b`, or/and `c` in RhymeBrain.com) in the response field from RhymeBrain API, these just represent whether the flag is present or not, the rest of the interface should follow pretty closely to the API responses, this is a quality of life feature so you dont have to mess with checking for flags yourself, the raw String flags are also available using `.flags` in some cases.
