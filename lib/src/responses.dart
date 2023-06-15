@@ -70,10 +70,18 @@ class Portmanteaus {
 }
 
 class WordInfo {
+  /// The [word] you asked for info on
   String word;
+  /// The pronunciation of the word
   String pron;
+  /// The phonetic transcription of the word, represented as a string
   String ipa;
+  /// The Integer representing how common a word is with the highest value being
+  /// 34 as of 6/14/23
   int? freq;
+  /// A string representing the flags passed from RhymeBrain
+  /// 
+  /// [offensive], [common], and [confident] all are derived from this string.
   String flags;
 
   /// Word is offensive if true

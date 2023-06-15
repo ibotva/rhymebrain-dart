@@ -114,3 +114,7 @@ RhymeBrain.com requires you to adknowledge them in your app in some way, shape, 
 
 Please refer to [RhymeBrain Documentation](https://rhymebrain.com/api.html) for a better understanding of the API, and remember to adknowledge them for usage of their API.
 
+There is also a [ISO639-1](https://github.com/ibotva/rhymebrain-dart/blob/main/lib/bin/iso6391.dart) to refer to for valid country codes.
+
+More information on phonetics:
+- [Full International Phonetic Alphabet Chart](https://www.internationalphoneticassociation.org/content/full-ipa-chart)
