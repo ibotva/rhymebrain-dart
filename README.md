@@ -9,9 +9,7 @@ Warning: This package does not have a stable version yet, it may not work as int
 - Get Portmanteaus's of a word
 - Get Info for a word
 - Unfinished or Unstarted: Add cache for all functions
-- [TODO]: Add comment to rest of response classes
 - [TODO]: Add comments to parameters class
-- [TODO]: Finish unit tests
 
 ## Getting started
 
@@ -25,89 +23,29 @@ Installtion is simple, run `dart pub add rhymebrain`
 
 For any response that has `.offensive`, `.confident`, or `.common`, these are derived from `flags` (which are represented as a string containing the letters `a`, `b`, or/and `c` in RhymeBrain.com) in the response field from RhymeBrain API, these just represent whether the flag is present or not, the rest of the interface should follow pretty closely to the API responses, this is a quality of life feature so you dont have to mess with checking for flags yourself, the raw String flags are also available using `.flags` in some cases.
 
+Basic Usage:
+```dart
+final rbclient = RhymeBrain();
+```
+
 ### How to get rhymes
+[Detailed Example](https://github.com/ibotva/rhymebrain-dart/blob/main/example/getrhymes.dart)
 This returns an array of info about words that rhyme with a given word, in the below, we use the example word "test":
 ```dart
-/// Initialize the client
-RhymeBrain rbclient = RhymeBrain();
-
-/// takes optional maxResults integer argument.
-/// takes optional lang String, ISO639-1 format.
-final List<Rhyme> rhymes = await rbclient.getRhymes(word: "test");
-
-for (var rhyme in rhymes) {
-    /// The rhyming word
-    print(rhyme.word);
-
-    /// 300+ score is a perfect rhyme, 0-300 is near perfect or consonant
-    print(rhyme.score);
-
-    /// Contains each syllable
-    print(rhyme.syllables);
-
-    /// Integer that shows how common word is, maximum value is 34 as of 6/14/23.
-    print(rhyme.freq);
-
-    /// Boolean that describes whether the word is offensive
-    print(info.offensive);
-
-    /// Boolean that describes whether the word is found in most dictionaries
-    print(info.common);
-
-    /// Boolean that describes whether RhymeBrain is confident in their pronunciation of the word.
-    print(info.confident)
-}
+await rbclient.getRhymes(word: "test");
 ```
 
 ### How to get Portmanteaus's
+[Detailed Example](https://github.com/ibotva/rhymebrain-dart/blob/main/example/getportmanteaus.dart)
 This returns an array of Portmanteau's, these are words that are combined together into one word. You pass one word, and it fines words to create Portmanteaus with:
 ```dart
-/// Initialize client
-RhymeBrain rbclient = RhymeBrain();
-
-/// takes optional maxResults integer argument.
-/// takes optional lang String, ISO639-1 format.
-Portmanteau portmanteau = await rbclient.getPortmanteau(word: "test");
-
-/// Basically, the API returns a string of the source words ("test", and the portmanteau), separated with commas, sourceSplit is just an array of the words without commas. You may access raw String with [portmanteau.source] if neccesary.
-/// These are the words to be comined into [portmanteau.source]
-print(portmanteau.sourceSplit);
-
-/// Same is true as the above comment, except with [portmanteau.combined] being the raw value.
-/// This is the Portmanteau's generated (otherwise known as combined words) word.
-print(portmanteau.combinedSplit);
+await rbclient.getPortmanteau(word: "test");
 ```
 
 ### How to get Word Info
-This returns word info from the RhymeBrain.com API.
+[Detailed Example](https://github.com/ibotva/rhymebrain-dart/blob/main/example/getinfo.dart)
 ```dart
-/// Initialize the client
-RhymeBrain rbclient = RhymeBrain();
-
-/// Get the words info
-WordInfo info = await rbclient.getWordInfo(word: "test");
-
-/// The word you requested info for
-print(info.word);
-
-/// Pronunciation of the word
-print(info.pron);
-
-/// This is the phonetic transcription of the word
-/// Phonetics is basically how a word is pronounced, in a written form, it assigns certain sounds in a word to written text.
-print(info.ipa);
-
-/// Frequency tells you how common a word is, with maximum value being 34 as of 6/14/23.
-print(info.freq);
-
-/// Boolean that describes whether the word is offensive
-print(info.offensive);
-
-/// Boolean that describes whether the word is found in most dictionaries
-print(info.common);
-
-/// Boolean that describes whether RhymeBrain is confident in their pronunciation of the word.
-print(info.confident)
+await rbclient.getWordInfo(word: "test");
 ```
 
 ## Additional information
