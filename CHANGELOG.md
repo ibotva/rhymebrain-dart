@@ -19,3 +19,7 @@
 ## 0.0.11-dev.2
 
 - Status badge and Github actions added
+
+## 0.0.11-dev.3
+
+- Bumping version one more time to fix pubdev read me
