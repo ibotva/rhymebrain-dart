@@ -1,6 +1,6 @@
 name: rhymebrain
 description: An API wrapper for RhymeBrain.com. This allows you to get rhymes, portmanteaus, and info about a word.
-version: 0.0.11-dev.3
+version: 0.1.0-dev.1
 repository: https://github.com/ibotva/rhymebrain-dart
 
 environment:

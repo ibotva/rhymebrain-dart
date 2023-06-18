@@ -23,3 +23,8 @@
 ## 0.0.11-dev.3
 
 - Bumping version one more time to fix pubdev read me
+
+
+## 0.1.0-dev.1
+
+- First version I can comfortably say works correctly.
