@@ -9,7 +9,7 @@ Future<void> run() async {
 
     /// The rhyming word [String]
     print(rhyme.word);
-
+    
     /// Score of how close of a rhyme it is [int]
     /// 300+ is a perfect rhyme
     /// 0-300 is a near-perfect rhyme or consonant

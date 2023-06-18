@@ -7,9 +7,6 @@ class Rhyme {
   /// Scores of 300 and above are perfect rhymes, 0-300 means near rhymes or similar sounding consonents
   int score;
 
-  /// String containing the flags that are later converted to [common], [offensive], and [confident]
-  String flags;
-
   /// [syllables] contains estimated number of syllables in [word]
   late int syllables;
 
@@ -24,16 +21,21 @@ class Rhyme {
 
   /// The pronunciation of the word is known with absolute confidence if true
   late bool confident;
-  Rhyme(
-      {required this.word,
-      required this.score,
-      required this.flags,
-      required syllables,
-      required this.freq}) {
-    this.syllables = int.parse(syllables);
-    offensive = flags.contains("a");
-    common = flags.contains("b");
-    confident = flags.contains("c");
+
+  /// This is a [Rhyme] for a queried word
+  Rhyme({ required String flags,
+    required String syllables,
+    required this.word,
+    required this.score,
+    required this.freq 
+    }) {
+      this.syllables = int.parse(syllables);
+
+      /// Pulls apart flags and converts them to booleans.
+      offensive = flags.contains("a");
+      common = flags.contains("b");
+      confident = flags.contains("c");
+
   }
 }
 
@@ -41,66 +43,56 @@ class Rhyme {
 /// A portmanteaus takes your word, finds more similar words, and merges the two together
 class Portmanteaus {
 
-  /// Raw API response for source, a string separated with commans, with the 
-  /// given argument wor and the word found by RhymeBrain in said String.
-  String source;
-
-  /// Raw API response for the combined strings, (or Portmanteaus) of said source,
-  /// This is also separated by commas occassionally, when the API is able to 
-  /// generate multiple Portmanteaus
-  String combined;
-
-  /// [List] containing each item within the [combined], without the commas
+  /// [List] containing each [String] item within the [combined], without the commas
   /// This is meant to be an easy quality of life addition to how the data
   /// is presented.
-  late List<String> combinedSplit;
+  late List<String> source;
 
-  /// [List] containing each item within [source], without the commas.
+  /// [List] containing each [String] item within [source], without the commas.
   /// This is meant to be an easy quality of life feature.
-  late List<String> sourceSplit;
+  late List<String> combined;
 
   /// [Portmanteaus] is a similar word combined with provided word
-  /// Examples:
-  /// ```dart
-  /// ```
-  Portmanteaus({required this.source, required this.combined}) {
-    combinedSplit = combined.split(",");
-    sourceSplit = source.split(",");
+  Portmanteaus({ required String source, required String combined }) {
+    this.source = source.split(",");
+    this.combined = combined.split(",");
   }
 }
 
 class WordInfo {
+
   /// The [word] you asked for info on
   String word;
-  /// The pronunciation of the word
+
+  /// The pronunciation of the [word]
   String pron;
-  /// The phonetic transcription of the word, represented as a string
+
+  /// The phonetic transcription of the [word], represented as a [String]
   String ipa;
-  /// The Integer representing how common a word is with the highest value being
+
+  /// The [int] representing how common a [word] is with the highest value being
   /// 34 as of 6/14/23
   int? freq;
-  /// A string representing the flags passed from RhymeBrain
-  /// 
-  /// [offensive], [common], and [confident] all are derived from this string.
-  String flags;
 
-  /// Word is offensive if true
+
+  /// [word] is offensive if true
   late bool offensive;
 
-  /// Word may be found in most dictionaries if true
+  /// [word] may be found in most dictionaries if true
   late bool common;
 
-  /// The pronunciation of the word is known with absolute confidence if true
+  /// The pronunciation of the [word] is known with absolute confidence if true
   late bool confident;
-  WordInfo(
-      {required this.word,
-      required this.pron,
-      required this.ipa,
-      required this.freq,
-      required this.flags}) {
-    offensive = flags.contains("a");
-    common = flags.contains("b");
-    confident = flags.contains("c");
+  WordInfo({ required String flags,
+    required this.word,
+    required this.pron,
+    required this.ipa,
+    required this.freq 
+    }) {
+      /// Pulls apart flags and turns them to boolean value
+      offensive = flags.contains("a");
+      common = flags.contains("b");
+      confident = flags.contains("c");
   }
 }
 
@@ -110,5 +102,5 @@ class FuzzyRhyme {
 
   /// [FuzzyRhyme] is a part of the list returned by the getFuzzyRhyme function
   /// on the RhymeBrain.com API
-  FuzzyRhyme({required this.word1, required this.word2});
+  FuzzyRhyme({ required this.word1, required this.word2 });
 }

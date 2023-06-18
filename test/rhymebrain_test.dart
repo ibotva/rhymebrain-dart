@@ -14,8 +14,6 @@ void main() {
       for (final rhyme in rhymes) {
         expect(rhyme.word, isA<String>(),
             reason: "Could not find rhyme: ${rhyme.word}");
-        expect(rhyme.flags, isA<String>(),
-            reason: "Flags are not a string: ${rhyme.flags}");
         expect(rhyme.score, isA<int>(),
             reason: "Score is not an int: ${rhyme.score}");
         expect(rhyme.syllables, isA<int>(),
@@ -62,10 +60,8 @@ void main() {
     test("Gets a Portmanteaus for 'best'", () async {
       final portmanteaus = await rbclient.getPortmanteaus(word: "best");
       for (var p in portmanteaus) {
-        expect(p.combined, isA<String>());
-        expect(p.combinedSplit, isA<List<String>>());
-        expect(p.source, isA<String>());
-        expect(p.sourceSplit, isA<List<String>>());
+        expect(p.combined, isA<List<String>>());
+        expect(p.source, isA<List<String>>());
       }
     });
 

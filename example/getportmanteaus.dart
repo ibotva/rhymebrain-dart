@@ -7,13 +7,9 @@ Future<void> run() async {
       await rbclient.getPortmanteaus(word: "best");
 
   for (final portmanteau in portmanteausList) {
-
     /// Any word based on the original word and new source word are in this list
-    print(portmanteau.sourceSplit);
-
-    /// Any combined words generated from the source are in this list
-    print(portmanteau.combinedSplit);
-
+    print(portmanteau.combined);
+    print(portmanteau.source);
   }
 }
 
