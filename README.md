@@ -8,8 +8,10 @@ Warning: This package does not have a stable version yet, it may not work as int
 - Get Rhymes of a word
 - Get Portmanteaus's of a word
 - Get Info for a word
-- Unfinished or Unstarted: Add cache for all functions
-- [TODO]: Add comments to parameters class
+
+## Future Features
+
+- Cache
 
 ## Getting started
 

@@ -1,5 +1,15 @@
 import 'package:rhymebrain/bin/iso6391.dart';
 
+abstract class RhymeBrainParams {
+
+  String function;
+
+  String word;
+
+  RhymeBrainParams
+}
+
+/// Parameters class following
 class RhymeBrainParameters {
   /// [word] you would like to query to RhymeBrain.com
   String word;
@@ -14,30 +24,31 @@ class RhymeBrainParameters {
   int? maxResults;
 
   /// [RhymeBrainParameters] constructor to create parameters for RhymeBrain.
-  RhymeBrainParameters({ required this.word, 
-    required this.function,
-    this.lang, 
-    this.maxResults 
-    }) {
-      /// Checks if the function is listed in RhymeBrain API Documentation and warns if not.
-      if ( !(function == "getRhymes") &&
-          !(function == "getWordInfo") &&
-          !(function == "getPortmanteaus") ) {
-        print("[WARNING]: You have not passed a valid function, this may lead to unexpected behavior.");
-      }
+  RhymeBrainParameters(
+      {required this.word,
+      required this.function,
+      this.lang,
+      this.maxResults}) {
+    /// Checks if the function is listed in RhymeBrain API Documentation and warns if not.
+    if (!(function == "getRhymes") &&
+        !(function == "getWordInfo") &&
+        !(function == "getPortmanteaus")) {
+      print(
+          "[WARNING]: You have not passed a valid function, this may lead to unexpected behavior.");
+    }
 
-      /// Checks if given language code is valid according to ISO639-1 and warns if not.
-      if (lang != null) {
-        if (!iso6391codes.containsKey(lang)) {
-          print(
-              "[WARNING]: You have chosen a language that does not fall standard with ISO639-1 language code, they are two letter codes.");
-        }
+    /// Checks if given language code is valid according to ISO639-1 and warns if not.
+    if (lang != null) {
+      if (!iso6391codes.containsKey(lang)) {
+        print(
+            "[WARNING]: You have chosen a language that does not fall standard with ISO639-1 language code, they are two letter codes.");
       }
+    }
   }
 
   /// Converts object to a map readable as URL parameters for HTTP library.
   toMap() {
-    Map<String, dynamic> map = { "function": function, "word": word };
+    Map<String, dynamic> map = {"function": function, "word": word};
     if (maxResults != null) {
       map["maxResults"] = maxResults!;
     }
