@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:js_interop';
 import 'package:http/http.dart' as http;
+import 'package:rhymebrain/src/cache.dart';
 import 'package:rhymebrain/src/parameters.dart';
 import 'package:rhymebrain/src/responses.dart';
 
@@ -11,7 +13,8 @@ import 'package:rhymebrain/src/responses.dart';
 /// final rbclient = RhymeBrain();
 /// ```
 class RhymeBrain {
-  RhymeBrain();
+  Cache? cache;
+  RhymeBrain({this.cache});
 
   /// Makes a HTTP GET request to RhymeBrain.com/talk endpoint
   ///
@@ -33,21 +36,31 @@ class RhymeBrain {
   /// List<Rhyme> rhymes = rbclient.getRhymes(word: "test");
   /// ```
   FutureOr<List<Rhyme>> getRhymes(RhymeParams parameters) async {
-      final List parsed = json.decode(await request(parameters));
-
-      final List<Rhyme> rhymes = [];
-
-      /// Creates a new [Rhyme] object to each item on the list and adds it to rhymes
-      for (var obj in parsed) {
-        rhymes.add(Rhyme(
-            word: obj["word"],
-            score: obj["score"],
-            flags: obj["flags"],
-            syllables: obj["syllables"],
-            freq: obj["freq"]));
+    if (cache.isDefinedAndNotNull) {
+      var rhymes = cache?.getRhymes(parameters);
+      if (rhymes.isDefinedAndNotNull) {
+        return rhymes!;
       }
-      
-      return rhymes;
+    }
+    final List parsed = json.decode(await request(parameters));
+
+    final List<Rhyme> rhymes = [];
+
+    /// Creates a new [Rhyme] object to each item on the list and adds it to rhymes
+    for (var obj in parsed) {
+      rhymes.add(Rhyme(
+          word: obj["word"],
+          score: obj["score"],
+          flags: obj["flags"],
+          syllables: obj["syllables"],
+          freq: obj["freq"]));
+    }
+
+    if (cache.isDefinedAndNotNull) {
+      cache?.setRhymes(parameters, rhymes);
+    }
+
+    return rhymes;
   }
 
   /// Gets [WordInfo] about a given [word]
@@ -57,17 +70,26 @@ class RhymeBrain {
   /// WordInfo info = rbclient.getWordInfo(word: "test");
   /// ```
   FutureOr<WordInfo> getWordInfo(WordInfoParams parameters) async {
+    if (cache.isDefinedAndNotNull) {
+      var wordInfo = cache?.getWordInfo(parameters);
+      if (wordInfo.isDefinedAndNotNull) {
+        return wordInfo!;
+      }
+    }
+    final parsed = json.decode(await request(parameters));
 
+    final wordInfo = WordInfo(
+        word: parsed["word"],
+        pron: parsed["pron"],
+        ipa: parsed["ipa"],
+        freq: parsed["freq"],
+        flags: parsed["flags"]);
 
-      final parsed = json.decode(await request(parameters));
+    if (cache.isDefinedAndNotNull) {
+      cache?.setWordInfo(parameters, wordInfo);
+    }
 
-      return WordInfo(
-          word: parsed["word"],
-          pron: parsed["pron"],
-          ipa: parsed["ipa"],
-          freq: parsed["freq"],
-          flags: parsed["flags"]
-      );
+    return wordInfo;
   }
 
   /// Gets a list of [Portmanteaus]'s for a given [word]
@@ -77,19 +99,28 @@ class RhymeBrain {
   /// ```
   /// List<Portmanteaus> portmanteausList = rbclient.getPortmanteaus(word: "test");
   /// ```
-  FutureOr<List<Portmanteaus>> getPortmanteaus(PortmanteausParams parameters) async {
-      final parsed = json.decode(await request(parameters));
-
-      final List<Portmanteaus> portmanteausList = [];
-
-      for (var obj in parsed) {
-        portmanteausList.add(Portmanteaus(
-          source: obj["source"], 
-          combined: obj["combined"])
-        );
+  FutureOr<List<Portmanteaus>> getPortmanteaus(
+      PortmanteausParams parameters) async {
+    if (cache.isDefinedAndNotNull) {
+      final portmanteaus = cache?.getPortmanteaus(parameters);
+      if (portmanteaus.isDefinedAndNotNull) {
+        return portmanteaus!;
       }
+    }
+    final parsed = json.decode(await request(parameters));
 
-      return portmanteausList;
+    final List<Portmanteaus> portmanteausList = [];
+
+    for (var obj in parsed) {
+      portmanteausList
+          .add(Portmanteaus(source: obj["source"], combined: obj["combined"]));
+    }
+
+    if (cache.isDefinedAndNotNull) {
+      cache?.setPortmanteaus(parameters, portmanteausList);
+    }
+
+    return portmanteausList;
   }
 
   /// This is technically public, and it technically works, but is not written
@@ -98,16 +129,12 @@ class RhymeBrain {
   /// However, JSONB functions are noted in the docs so i believe these are just
   /// not written in, but still intended to be used.
   FutureOr<List<FuzzyRhyme>> getFuzzyRhymes(FuzzyRhymeParams parameters) async {
-
     final parsed = json.decode(await request(parameters));
 
     final List<FuzzyRhyme> fuzzyrhymes = [];
 
     for (var obj in parsed) {
-      fuzzyrhymes.add(FuzzyRhyme(
-        word1: obj["word1"], 
-        word2: obj["word2"]
-      ));
+      fuzzyrhymes.add(FuzzyRhyme(word1: obj["word1"], word2: obj["word2"]));
     }
 
     return fuzzyrhymes;

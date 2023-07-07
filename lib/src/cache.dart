@@ -1,17 +1,15 @@
-import 'dart:js_interop';
-
 import 'package:rhymebrain/rhymebrain.dart';
 
 class FullRhymeResponse {
   RhymeParams parameters;
-  Rhyme rhyme;
+  List<Rhyme> rhyme;
 
   FullRhymeResponse({required this.parameters, required this.rhyme});
 }
 
 class FullPortmanteausResponse {
   PortmanteausParams parameters;
-  Portmanteaus portmanteaus;
+  List<Portmanteaus> portmanteaus;
   FullPortmanteausResponse(
       {required this.parameters, required this.portmanteaus});
 }
@@ -45,7 +43,7 @@ class Cache {
     refreshAt = refreshAt.add(refreshEvery);
   }
 
-  void _handleRefresh() {
+  void _handleRefresh() async {
     if (DateTime.now().isAfter(refreshAt)) {
       rhymesResponses = [];
       portmanteausResponses = [];
@@ -54,12 +52,12 @@ class Cache {
     }
   }
 
-  void setRhymes(FullRhymeResponse response) {
+  void setRhymes(RhymeParams parameters, List<Rhyme> rhyme) async {
     _handleRefresh();
-    rhymesResponses.add(response);
+    rhymesResponses.add(FullRhymeResponse(parameters: parameters, rhyme: rhyme));
   }
 
-  Rhyme? getRhymes(RhymeParams parameters) {
+  List<Rhyme>? getRhymes(RhymeParams parameters) {
     _handleRefresh();
     try {
       return rhymesResponses
@@ -71,13 +69,13 @@ class Cache {
   }
 
   void setPortmanteaus(
-      PortmanteausParams parameters, Portmanteaus portmanteaus) {
+      PortmanteausParams parameters, List<Portmanteaus> portmanteaus) async {
     _handleRefresh();
     portmanteausResponses.add(FullPortmanteausResponse(
         parameters: parameters, portmanteaus: portmanteaus));
   }
 
-  Portmanteaus? getPortmanteaus(PortmanteausParams parameters) {
+  List<Portmanteaus>? getPortmanteaus(PortmanteausParams parameters) {
     _handleRefresh();
     try {
       return portmanteausResponses
@@ -88,7 +86,7 @@ class Cache {
     }
   }
 
-  void setWordInfo(WordInfoParams wordInfoParams, WordInfo wordInfo) {
+  void setWordInfo(WordInfoParams wordInfoParams, WordInfo wordInfo) async {
     _handleRefresh();
     wordInfoResponses.add(
         FullWordInfoResponse(parameters: wordInfoParams, wordInfo: wordInfo));
