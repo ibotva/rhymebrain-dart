@@ -19,7 +19,7 @@ class RhymeBrain {
   /// ```
   /// rbclient.request(RhymeBrainParameters(word: word))
   /// ```
-  request(RhymeBrainParameters parameters) async {
+  request(dynamic parameters) async {
     final url = Uri.https("rhymebrain.com", "/talk", parameters.toMap());
     return (await http.get(url)).body;
   }
@@ -32,17 +32,7 @@ class RhymeBrain {
   /// ```
   /// List<Rhyme> rhymes = rbclient.getRhymes(word: "test");
   /// ```
-  FutureOr<List<Rhyme>> getRhymes({ required String word, 
-    String lang = "en", 
-    int? maxResults }) async {
-
-      final parameters = RhymeBrainParameters(
-          word: word, 
-          function: "getRhymes", 
-          lang: lang, maxResults: 
-          maxResults
-      );
-
+  FutureOr<List<Rhyme>> getRhymes(RhymeParams parameters) async {
       final List parsed = json.decode(await request(parameters));
 
       final List<Rhyme> rhymes = [];
@@ -66,15 +56,8 @@ class RhymeBrain {
   /// ```
   /// WordInfo info = rbclient.getWordInfo(word: "test");
   /// ```
-  FutureOr<WordInfo> getWordInfo({ required String word, 
-    String lang = "en"
-    }) async {
+  FutureOr<WordInfo> getWordInfo(WordInfoParams parameters) async {
 
-      final parameters = RhymeBrainParameters(
-        word: word, 
-        function: "getWordInfo", 
-        lang: lang
-      );
 
       final parsed = json.decode(await request(parameters));
 
@@ -94,17 +77,7 @@ class RhymeBrain {
   /// ```
   /// List<Portmanteaus> portmanteausList = rbclient.getPortmanteaus(word: "test");
   /// ```
-  FutureOr<List<Portmanteaus>> getPortmanteaus({  required String word, 
-    String lang = "en", 
-    int? maxResults
-    }) async {
-
-      final parameters = RhymeBrainParameters(
-          word: word, 
-          function: "getPortmanteaus", 
-          maxResults: maxResults
-      );
-
+  FutureOr<List<Portmanteaus>> getPortmanteaus(PortmanteausParams parameters) async {
       final parsed = json.decode(await request(parameters));
 
       final List<Portmanteaus> portmanteausList = [];
@@ -124,12 +97,7 @@ class RhymeBrain {
   /// credit the author, possibly reach out before using this endpoint.
   /// However, JSONB functions are noted in the docs so i believe these are just
   /// not written in, but still intended to be used.
-  FutureOr<List<FuzzyRhyme>> getFuzzyRhymes({required String word}) async {
-
-    final parameters = RhymeBrainParameters(
-      word: word, 
-      function: "getFuzzyRhymes"
-    );
+  FutureOr<List<FuzzyRhyme>> getFuzzyRhymes(FuzzyRhymeParams parameters) async {
 
     final parsed = json.decode(await request(parameters));
 

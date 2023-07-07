@@ -28,3 +28,13 @@
 ## 0.1.0-dev.1
 
 - First version I can comfortably say works correctly.
+
+## 0.1.0-dev.2
+
+- Updated `README.md` to reflect changes to features list so I can properly open issues.
+
+- Redid the parameters types to be separate objects.
+
+## 0.1.2
+
+- Version bump.
