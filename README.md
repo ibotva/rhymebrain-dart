@@ -34,20 +34,20 @@ final rbclient = RhymeBrain();
 [Detailed Example](https://github.com/ibotva/rhymebrain-dart/blob/main/example/getrhymes.dart)
 This returns an array of info about words that rhyme with a given word, in the below, we use the example word "test":
 ```dart
-await rbclient.getRhymes(word: "test");
+await rbclient.getRhymes(RhymeParams(word: "test", maxResults?: 100));
 ```
 
-### How to get Portmanteaus's
+### How to get Portmanteaus
 [Detailed Example](https://github.com/ibotva/rhymebrain-dart/blob/main/example/getportmanteaus.dart)
 This returns an array of Portmanteau's, these are words that are combined together into one word. You pass one word, and it fines words to create Portmanteaus with:
 ```dart
-await rbclient.getPortmanteau(word: "test");
+await rbclient.getPortmanteaus(PortmanteausParams(word: "test"));
 ```
 
 ### How to get Word Info
 [Detailed Example](https://github.com/ibotva/rhymebrain-dart/blob/main/example/getinfo.dart)
 ```dart
-await rbclient.getWordInfo(word: "test");
+await rbclient.getWordInfo(WordInfoParams(word: "test"));
 ```
 
 ## Additional information
