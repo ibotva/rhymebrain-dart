@@ -28,6 +28,9 @@ For any response that has `.offensive`, `.confident`, or `.common`, these are de
 Basic Usage:
 ```dart
 final rbclient = RhymeBrain();
+
+/// If you would like to cache data, you need to add the cache and set the duration, the client will automatically handle the management of the cache for you, so you can use library as normal.
+final rbclient = RhymeBrain(Cache(refreshEvery: Duration(minutes: 10)));
 ```
 
 ### How to get rhymes
