@@ -42,3 +42,7 @@
 ## 0.1.3
 
 - Finished cache and implemented it to client, it stores the parameters used, and the result, and if the parameters match it returns from cache instead.
+
+## 1.0.0-dev.1
+
+- We are at a point where things should be working correctly!
