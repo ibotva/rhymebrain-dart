@@ -1,12 +1,22 @@
 import 'package:rhymebrain/bin/iso6391.dart';
 
 abstract class RhymeBrainParams {
+  final List<String> _validFunctions = [
+    "getRhymes",
+    "getWordInfo",
+    "getPortmanteaus",
+    "getFuzzyRhymes"
+  ];
 
   String function;
 
   String word;
 
-  RhymeBrainParams
+  RhymeBrainParams({required this.function, required this.word}) {
+    if (!_validFunctions.contains(word)) {
+      print("Warning: you have passed an invalid function $function");
+    }
+  }
 }
 
 /// Parameters class following
