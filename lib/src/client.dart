@@ -94,17 +94,7 @@ class RhymeBrain {
   /// ```
   /// List<Portmanteaus> portmanteausList = rbclient.getPortmanteaus(word: "test");
   /// ```
-  FutureOr<List<Portmanteaus>> getPortmanteaus({  required String word, 
-    String lang = "en", 
-    int? maxResults
-    }) async {
-
-      final parameters = RhymeBrainParameters(
-          word: word, 
-          function: "getPortmanteaus", 
-          maxResults: maxResults
-      );
-
+  FutureOr<List<Portmanteaus>> getPortmanteaus(PortmanteausParams parameters) async {
       final parsed = json.decode(await request(parameters));
 
       final List<Portmanteaus> portmanteausList = [];
