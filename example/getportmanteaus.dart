@@ -4,7 +4,7 @@ Future<void> run() async {
   final RhymeBrain rbclient = RhymeBrain();
 
   final List<Portmanteaus> portmanteausList =
-      await rbclient.getPortmanteaus(word: "best");
+      await rbclient.getPortmanteaus(PortmanteausParams(word: "test"));
 
   for (final portmanteau in portmanteausList) {
     /// Any word based on the original word and new source word are in this list

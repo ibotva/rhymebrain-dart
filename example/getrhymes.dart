@@ -3,7 +3,7 @@ import 'package:rhymebrain/rhymebrain.dart';
 Future<void> run() async {
   final RhymeBrain rbclient = RhymeBrain();
 
-  final List<Rhyme> rhymes = await rbclient.getRhymes(word: "best");
+  final List<Rhyme> rhymes = await rbclient.getRhymes(RhymeParams(word: "test", maxResults: 10));
 
   for (final rhyme in rhymes) {
 

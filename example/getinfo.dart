@@ -2,7 +2,7 @@ import 'package:rhymebrain/rhymebrain.dart';
 
 run() async {
   final RhymeBrain rbclient = RhymeBrain();
-  final WordInfo info = await rbclient.getWordInfo(word: "best");
+  final WordInfo info = await rbclient.getWordInfo(WordInfoParams(word: "test"));
   /// The word that you queried, in this case "best"
   print(info.word);
 
