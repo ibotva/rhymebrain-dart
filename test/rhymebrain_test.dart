@@ -23,7 +23,7 @@ void main() {
     });
     print("Hello world");
     test("Should find a rhyme for 'best'", () async {
-      final rhymes = await rbclient.getRhymes(word: "best");
+      final rhymes = await rbclient.getRhymes(RhymeParams(word: "best"));
 
       for (final rhyme in rhymes) {
         expect(rhyme.word, isA<String>(),
@@ -44,7 +44,7 @@ void main() {
     });
 
     test("Should find info for the word 'best'", () async {
-      final info = await rbclient.getWordInfo(word: "best");
+      final info = await rbclient.getWordInfo(WordInfoParams(word: "best"));
       expect(info.word, isA<String>(),
           reason: "Word is not a string: ${info.word}");
       expect(info.pron, isA<String>(),
@@ -62,7 +62,7 @@ void main() {
     });
 
     test("Gets fuzzy rhymes for 'best'", () async {
-      final fuzzyrhymes = await rbclient.getFuzzyRhymes(word: "best");
+      final fuzzyrhymes = await rbclient.getFuzzyRhymes(FuzzyRhymeParams(word: "best"));
       for (var fuzzyrhyme in fuzzyrhymes) {
         expect(fuzzyrhyme.word1, isA<String>(),
             reason: "Word one could not be found: ${fuzzyrhyme.word1}");
@@ -72,7 +72,7 @@ void main() {
     });
 
     test("Gets a Portmanteaus for 'best'", () async {
-      final portmanteaus = await rbclient.getPortmanteaus(word: "best");
+      final portmanteaus = await rbclient.getPortmanteaus(PortmanteausParams(word: "best"));
       for (var p in portmanteaus) {
         expect(p.combined, isA<List<String>>());
         expect(p.source, isA<List<String>>());
