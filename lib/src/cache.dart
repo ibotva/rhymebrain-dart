@@ -1,3 +1,5 @@
+import 'dart:js_interop';
+
 import 'package:rhymebrain/rhymebrain.dart';
 
 class FullRhymeResponse {
@@ -30,13 +32,13 @@ class FullFuzzyRhymeResponse {
 */
 class Cache {
   List<FullRhymeResponse> rhymesResponses = [];
-  List<FullPortmanteausResponse> portmanteausResponse = [];
-  List<FullWordInfoResponse> wordInfoResponse = [];
+  List<FullPortmanteausResponse> portmanteausResponses = [];
+  List<FullWordInfoResponse> wordInfoResponses = [];
   /*
   /// Disabled because should not be used
   List<FullFuzzyRhymeResponse> fuzzyRhymeResponse = [];
   */
-  
+
   DateTime refreshAt = DateTime.now();
   Duration refreshEvery;
   Cache({required this.refreshEvery}) {
@@ -46,6 +48,8 @@ class Cache {
   void _handleRefresh() {
     if (DateTime.now().isAfter(refreshAt)) {
       rhymesResponses = [];
+      portmanteausResponses = [];
+      wordInfoResponses = [];
       refreshAt = DateTime.now().add(refreshEvery);
     }
   }
@@ -56,11 +60,48 @@ class Cache {
   }
 
   Rhyme? getRhymes(RhymeParams parameters) {
-    for (var val in rhymesResponses) {
-      if (val.parameters == parameters) {
-        return val.rhyme;
-      }
+    _handleRefresh();
+    try {
+      return rhymesResponses
+          .firstWhere((element) => element.parameters == parameters)
+          .rhyme;
+    } catch (error) {
+      return null;
     }
-    return null;
+  }
+
+  void setPortmanteaus(
+      PortmanteausParams parameters, Portmanteaus portmanteaus) {
+    _handleRefresh();
+    portmanteausResponses.add(FullPortmanteausResponse(
+        parameters: parameters, portmanteaus: portmanteaus));
+  }
+
+  Portmanteaus? getPortmanteaus(PortmanteausParams parameters) {
+    _handleRefresh();
+    try {
+      return portmanteausResponses
+          .firstWhere((element) => element.parameters == parameters)
+          .portmanteaus;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  void setWordInfo(WordInfoParams wordInfoParams, WordInfo wordInfo) {
+    _handleRefresh();
+    wordInfoResponses.add(
+        FullWordInfoResponse(parameters: wordInfoParams, wordInfo: wordInfo));
+  }
+
+  WordInfo? getWordInfo(WordInfoParams wordInfoParams) {
+    _handleRefresh();
+    try {
+      return wordInfoResponses
+          .firstWhere((element) => element.parameters == wordInfoParams)
+          .wordInfo;
+    } catch (error) {
+      return null;
+    }
   }
 }
