@@ -66,15 +66,8 @@ class RhymeBrain {
   /// ```
   /// WordInfo info = rbclient.getWordInfo(word: "test");
   /// ```
-  FutureOr<WordInfo> getWordInfo({ required String word, 
-    String lang = "en"
-    }) async {
+  FutureOr<WordInfo> getWordInfo(WordInfoParams parameters) async {
 
-      final parameters = RhymeBrainParameters(
-        word: word, 
-        function: "getWordInfo", 
-        lang: lang
-      );
 
       final parsed = json.decode(await request(parameters));
 
