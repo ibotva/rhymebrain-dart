@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:js_interop';
 import 'package:http/http.dart' as http;
 import 'package:rhymebrain/src/cache.dart';
 import 'package:rhymebrain/src/parameters.dart';
