@@ -36,9 +36,9 @@ class RhymeBrain {
   /// List<Rhyme> rhymes = rbclient.getRhymes(word: "test");
   /// ```
   FutureOr<List<Rhyme>> getRhymes(RhymeParams parameters) async {
-    if (cache.isDefinedAndNotNull) {
+    if (cache != null) {
       var rhymes = cache?.getRhymes(parameters);
-      if (rhymes.isDefinedAndNotNull) {
+      if (!rhymes.isNull) {
         return rhymes!;
       }
     }
@@ -56,7 +56,7 @@ class RhymeBrain {
           freq: obj["freq"]));
     }
 
-    if (cache.isDefinedAndNotNull) {
+    if (cache != null) {
       cache?.setRhymes(parameters, rhymes);
     }
 
@@ -70,9 +70,9 @@ class RhymeBrain {
   /// WordInfo info = rbclient.getWordInfo(word: "test");
   /// ```
   FutureOr<WordInfo> getWordInfo(WordInfoParams parameters) async {
-    if (cache.isDefinedAndNotNull) {
+    if (cache != null) {
       var wordInfo = cache?.getWordInfo(parameters);
-      if (wordInfo.isDefinedAndNotNull) {
+      if (!wordInfo.isNull) {
         return wordInfo!;
       }
     }
@@ -85,7 +85,7 @@ class RhymeBrain {
         freq: parsed["freq"],
         flags: parsed["flags"]);
 
-    if (cache.isDefinedAndNotNull) {
+    if (cache != null) {
       cache?.setWordInfo(parameters, wordInfo);
     }
 
@@ -101,9 +101,9 @@ class RhymeBrain {
   /// ```
   FutureOr<List<Portmanteaus>> getPortmanteaus(
       PortmanteausParams parameters) async {
-    if (cache.isDefinedAndNotNull) {
+    if (cache != null) {
       final portmanteaus = cache?.getPortmanteaus(parameters);
-      if (portmanteaus.isDefinedAndNotNull) {
+      if (portmanteaus.isNull) {
         return portmanteaus!;
       }
     }
@@ -116,7 +116,7 @@ class RhymeBrain {
           .add(Portmanteaus(source: obj["source"], combined: obj["combined"]));
     }
 
-    if (cache.isDefinedAndNotNull) {
+    if (cache != null) {
       cache?.setPortmanteaus(parameters, portmanteausList);
     }
 
