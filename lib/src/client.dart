@@ -19,7 +19,7 @@ class RhymeBrain {
   /// ```
   /// rbclient.request(RhymeBrainParameters(word: word))
   /// ```
-  request(RhymeBrainParameters parameters) async {
+  request(dynamic parameters) async {
     final url = Uri.https("rhymebrain.com", "/talk", parameters.toMap());
     return (await http.get(url)).body;
   }
@@ -32,17 +32,7 @@ class RhymeBrain {
   /// ```
   /// List<Rhyme> rhymes = rbclient.getRhymes(word: "test");
   /// ```
-  FutureOr<List<Rhyme>> getRhymes({ required String word, 
-    String lang = "en", 
-    int? maxResults }) async {
-
-      final parameters = RhymeBrainParameters(
-          word: word, 
-          function: "getRhymes", 
-          lang: lang, maxResults: 
-          maxResults
-      );
-
+  FutureOr<List<Rhyme>> getRhymes(RhymeParams parameters) async {
       final List parsed = json.decode(await request(parameters));
 
       final List<Rhyme> rhymes = [];
