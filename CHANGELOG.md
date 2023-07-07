@@ -38,3 +38,7 @@
 ## 0.1.2
 
 - Version bump.
+
+## 0.1.3
+
+- Finished cache and implemented it to client, it stores the parameters used, and the result, and if the parameters match it returns from cache instead.
