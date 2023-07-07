@@ -34,3 +34,7 @@
 - Updated `README.md` to reflect changes to features list so I can properly open issues.
 
 - Redid the parameters types to be separate objects.
+
+## 0.1.2
+
+- Version bump.
