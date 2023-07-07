@@ -7,7 +7,8 @@ void main() {
     test("Should make getRhyme parameters", () {
       Map<String, dynamic> mappedParams = {
         "word": "test",
-        "function": "getRhymes"
+        "function": "getRhymes",
+        "lang": "en"
       };
       final parameters = RhymeParams(word: "test");
       expect(parameters.toMap(), mappedParams);
@@ -15,7 +16,42 @@ void main() {
       mappedParams["maxResults"] = 100;
       expect(parameters2.toMap(), mappedParams);
     });
+
+    test("Should make Portmanteaus parameters", () {
+      Map<String, dynamic> mappedParams = {
+        "word": "test",
+        "function": "getPortmanteaus",
+        "lang": "en"
+      };
+      final parameters = PortmanteausParams(word: "test");
+      expect(parameters.toMap(), mappedParams);
+      final parameters2 = PortmanteausParams(word: "test", maxResults: 100);
+      mappedParams["maxResults"] = 100;
+      expect(parameters2.toMap(), mappedParams);
+    });
+
+    test("Should make Word Info parameters", () {
+      Map<String, dynamic> mappedParams = {
+        "word": "test",
+        "function": "getWordInfo",
+        "lang": "en"
+      };
+      final parameters = WordInfoParams(word: "test");
+      expect(parameters.toMap(), mappedParams);
+    });
+
+    test("Should make FuzzyRhyme parameters", () {
+      Map<String, dynamic> mappedParams = {
+        "word": "test",
+        "function": "getFuzzyRhymes"
+      };
+      final parameters = FuzzyRhymeParams(word: "test");
+      expect(parameters.toMap(), mappedParams);
+    });
   });
+
+
+
   group('RhymeBrain Client Tests', () {
     final RhymeBrain rbclient = RhymeBrain();
     setUp(() {
