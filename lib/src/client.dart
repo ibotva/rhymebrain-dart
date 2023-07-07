@@ -38,8 +38,8 @@ class RhymeBrain {
   FutureOr<List<Rhyme>> getRhymes(RhymeParams parameters) async {
     if (cache != null) {
       var rhymes = cache?.getRhymes(parameters);
-      if (!rhymes.isNull) {
-        return rhymes!;
+      if (rhymes != null) {
+        return rhymes;
       }
     }
     final List parsed = json.decode(await request(parameters));
@@ -72,8 +72,8 @@ class RhymeBrain {
   FutureOr<WordInfo> getWordInfo(WordInfoParams parameters) async {
     if (cache != null) {
       var wordInfo = cache?.getWordInfo(parameters);
-      if (!wordInfo.isNull) {
-        return wordInfo!;
+      if (wordInfo != null) {
+        return wordInfo;
       }
     }
     final parsed = json.decode(await request(parameters));
@@ -103,8 +103,8 @@ class RhymeBrain {
       PortmanteausParams parameters) async {
     if (cache != null) {
       final portmanteaus = cache?.getPortmanteaus(parameters);
-      if (portmanteaus.isNull) {
-        return portmanteaus!;
+      if (portmanteaus != null) {
+        return portmanteaus;
       }
     }
     final parsed = json.decode(await request(parameters));
