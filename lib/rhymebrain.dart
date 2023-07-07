@@ -8,6 +8,7 @@ library;
 
 export 'src/client.dart';
 export 'src/responses.dart';
+export 'src/parameters.dart';
 
 /// TODO: Decide what can be made private in the library
 /// TODO: Figure out if its neccesary to export response classes

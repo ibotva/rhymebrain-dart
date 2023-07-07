@@ -2,6 +2,20 @@ import 'package:rhymebrain/rhymebrain.dart';
 import 'package:test/test.dart';
 
 void main() {
+  group("Rhyme Brain Parameters Tests", () {
+    setUp(() => {});
+    test("Should make getRhyme parameters", () {
+      Map<String, dynamic> mappedParams = {
+        "word": "test",
+        "function": "getRhymes"
+      };
+      final parameters = RhymeParams(word: "test");
+      expect(parameters.toMap(), mappedParams);
+      final parameters2 = RhymeParams(word: "test", maxResults: 100);
+      mappedParams["maxResults"] = 100;
+      expect(parameters2.toMap(), mappedParams);
+    });
+  });
   group('RhymeBrain Client Tests', () {
     final RhymeBrain rbclient = RhymeBrain();
     setUp(() {
@@ -64,6 +78,5 @@ void main() {
         expect(p.source, isA<List<String>>());
       }
     });
-
   });
 }
