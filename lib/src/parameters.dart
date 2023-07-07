@@ -1,13 +1,14 @@
 import 'package:rhymebrain/bin/iso6391.dart';
 
+/// This is a list of [_validFunctions] within RhymeBrain.com
+final List<String> _validFunctions = [
+  "getRhymes",
+  "getWordInfo",
+  "getPortmanteaus",
+  "getFuzzyRhymes"
+];
+
 abstract class RhymeBrainParams {
-  /// This is a list of [_validFunctions] within RhymeBrain.com
-  final List<String> _validFunctions = [
-    "getRhymes",
-    "getWordInfo",
-    "getPortmanteaus",
-    "getFuzzyRhymes"
-  ];
 
   /// The function to be queried.
   String function;
@@ -20,19 +21,44 @@ abstract class RhymeBrainParams {
       print("Warning: you have passed an invalid function $function");
     }
   }
+
+  Map<String, dynamic> _toMap({int? maxResults, String? lang}) {
+    Map<String, dynamic> map = {"function": function, "word": word};
+    if (maxResults != null) {
+      map["maxResults"] = maxResults;
+    }
+    if (lang != null) {
+      map["lang"] = lang;
+    }
+    return map;
+  }
 }
 
+/// Parameters class for getRhymes function.
 class GetRhymeParams extends RhymeBrainParams {
   String lang;
   int? maxResults;
 
+  /// ```
+  /// 
+  /// ```
   GetRhymeParams({
     required String word,
-    required String function,
     required this.lang,
     this.maxResults,
-  }) : super(function: function, word: word);
+  }) : super(function: _validFunctions[0], word: word) {
+    if (!iso6391codes.containsKey(lang)) {
+      print("Warning: You have chosen an invalid language code $lang");
+    }
+  }
+
+  /// Returns [Map] that HTTP lib can read.
+  toMap() {
+    return _toMap(maxResults: maxResults, lang: lang);
+  }
 }
+
+
 
 /// Parameters class following
 class RhymeBrainParameters {
