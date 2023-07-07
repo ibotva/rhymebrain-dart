@@ -124,12 +124,7 @@ class RhymeBrain {
   /// credit the author, possibly reach out before using this endpoint.
   /// However, JSONB functions are noted in the docs so i believe these are just
   /// not written in, but still intended to be used.
-  FutureOr<List<FuzzyRhyme>> getFuzzyRhymes({required String word}) async {
-
-    final parameters = RhymeBrainParameters(
-      word: word, 
-      function: "getFuzzyRhymes"
-    );
+  FutureOr<List<FuzzyRhyme>> getFuzzyRhymes(FuzzyRhymeParams parameters) async {
 
     final parsed = json.decode(await request(parameters));
 
