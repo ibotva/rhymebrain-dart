@@ -8,8 +8,13 @@ final List<String> _validFunctions = [
   "getFuzzyRhymes"
 ];
 
-abstract class RhymeBrainParams {
+_langWarningHandler(String lang) async {
+  if (!iso6391codes.containsKey(lang)) {
+    print("Warning: You have chosen an invalid language code $lang");
+  }
+}
 
+abstract class RhymeBrainParams {
   /// The function to be queried.
   String function;
 
@@ -40,16 +45,18 @@ class GetRhymeParams extends RhymeBrainParams {
   int? maxResults;
 
   /// ```
-  /// 
+  ///  GetRhymeParams(
+  ///   word: "test",
+  ///   lang?: "en",
+  ///   maxResults?: 30
+  /// )
   /// ```
   GetRhymeParams({
     required String word,
-    required this.lang,
+    this.lang = "en",
     this.maxResults,
   }) : super(function: _validFunctions[0], word: word) {
-    if (!iso6391codes.containsKey(lang)) {
-      print("Warning: You have chosen an invalid language code $lang");
-    }
+    _langWarningHandler(lang);
   }
 
   /// Returns [Map] that HTTP lib can read.
@@ -58,7 +65,14 @@ class GetRhymeParams extends RhymeBrainParams {
   }
 }
 
+class getWordInfo extends RhymeBrainParams {
+  String lang;
 
+  getWordInfo({required String word, this.lang = "en"})
+      : super(function: _validFunctions[1], word: word) {
+    _langWarningHandler(lang);
+  }
+}
 
 /// Parameters class following
 class RhymeBrainParameters {
